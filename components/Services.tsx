@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const serviceList = [
   {

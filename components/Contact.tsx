@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MoveRight, CheckCircle2, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { MoveRight, CheckCircle2, ChevronDown, ArrowUpRight, Loader2 } from 'lucide-react';
 
 const serviceOptions = [
   { value: 'Website Development', label: 'Website Architecture & Next.js' },
@@ -10,32 +10,33 @@ const serviceOptions = [
   { value: 'Mobile App Development', label: 'Mobile Application (iOS / Android)' },
   { value: 'Digital Marketing & SEO', label: 'SEO & Growth Marketing' },
   { value: 'Full Retainer / Custom Project', label: 'Full Retainer / Custom Project' },
+  { value: 'Crafting Your Idea', label: 'Crafting Your Idea · Ideation & Prototyping' },
 ];
 
 const socialChannels = [
   {
     name: 'LINKEDIN',
-    handle: '/company/thethreelayers',
+    handle: '/company/the3rdlayers',
     action: 'CONNECT',
-    url: 'https://linkedin.com',
+    url: 'https://www.linkedin.com/company/the3rdlayers',
   },
   {
     name: 'X / TWITTER',
-    handle: '@thethreelayers',
+    handle: '@the3rdlayers',
     action: 'FOLLOW',
-    url: 'https://twitter.com',
+    url: 'https://x.com/the3rdlayers',
   },
   {
     name: 'GITHUB',
-    handle: 'thethreelayers',
+    handle: 'the3rdlayers',
     action: 'REPOSITORIES',
-    url: 'https://github.com',
+    url: 'https://github.com/the3rdlayers',
   },
   {
     name: 'INSTAGRAM',
-    handle: '@thethreelayers',
+    handle: '@the3rdlayers',
     action: 'DISPATCHES',
-    url: 'https://instagram.com',
+    url: 'https://www.instagram.com/the3rdlayers',
   },
   {
     name: 'WHATSAPP',
@@ -53,6 +54,8 @@ export default function Contact() {
     details: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -66,10 +69,31 @@ export default function Contact() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
-    setSubmitted(true);
+    if (!formData.name || !formData.email || !formData.details) return;
+    setSending(true);
+    setSubmitError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to send your inquiry. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -90,14 +114,14 @@ export default function Contact() {
           </div>
 
           <p className="text-base sm:text-lg text-[#F3F0E9]/80 font-light leading-relaxed max-w-md">
-            Let's build something extraordinary together. Whether you are launching a new digital venture or scaling an existing architecture, we are ready to engineer your solution.
+            Let&apos;s build something extraordinary together. Whether you are launching a new digital venture or scaling an existing architecture, we are ready to engineer your solution.
           </p>
 
           <div className="space-y-3 pt-6 border-t border-white/15 text-xs sm:text-sm font-mono text-white/70">
             <div className="flex items-center gap-3">
               <span className="text-white/40 uppercase text-xs tracking-wider">EMAIL //</span>
-              <a href="mailto:hello@thethreelayers.com" className="text-white hover:text-[#DE3D1C] font-bold transition-colors">
-                hello@thethreelayers.com
+              <a href="mailto:hello@the3rdlayers.com" className="text-white hover:text-[#DE3D1C] font-bold transition-colors">
+                hello@the3rdlayers.com
               </a>
             </div>
 
@@ -264,11 +288,27 @@ export default function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="group w-full bg-[#0A0A0A] hover:bg-[#DE3D1C] text-white py-4 px-6 text-xs font-mono font-bold tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-200 cursor-pointer"
+                disabled={sending}
+                className="group w-full bg-[#0A0A0A] hover:bg-[#DE3D1C] disabled:hover:bg-[#0A0A0A] disabled:opacity-70 text-white py-4 px-6 text-xs font-mono font-bold tracking-widest uppercase flex items-center justify-center gap-3 transition-all duration-200 cursor-pointer disabled:cursor-wait"
               >
-                <span>START YOUR PROJECT</span>
-                <MoveRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                {sending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>SENDING...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>START YOUR PROJECT</span>
+                    <MoveRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                  </>
+                )}
               </button>
+
+              {submitError && (
+                <p className="text-xs font-mono text-[#DE3D1C] font-bold uppercase tracking-wider border border-[#DE3D1C]/40 bg-[#DE3D1C]/5 px-3 py-2.5">
+                  {submitError}
+                </p>
+              )}
             </form>
           )}
         </div>

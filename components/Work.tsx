@@ -149,49 +149,101 @@ export default function Work() {
                 const isSelected = activeProjectIdx === idx;
 
                 return (
-                  <button
-                    key={proj.id}
-                    onClick={() => setActiveProjectIdx(idx)}
-                    onMouseEnter={() => setActiveProjectIdx(idx)}
-                    className={`w-full text-left p-4 sm:p-4.5 transition-all duration-200 flex flex-col justify-between relative group cursor-pointer ${
-                      isSelected
-                        ? 'bg-[#0A0A0A] text-[#F3F0E9]'
-                        : 'hover:bg-white/70 text-[#0A0A0A]'
-                    }`}
-                  >
-                    {/* Active Left Indicator Bar */}
-                    <div
-                      className={`absolute left-0 top-0 bottom-0 w-1.5 bg-[#DE3D1C] transition-opacity ${
-                        isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'
-                      }`}
-                    />
-
-                    <div className="flex justify-between items-center w-full mb-2">
-                      <span className="text-xs font-mono font-bold text-[#DE3D1C]">
-                        [{proj.id}]
-                      </span>
-
-                      <ArrowUpRight
-                        className={`w-4 h-4 transition-transform ${
-                          isSelected
-                            ? 'rotate-45 text-[#DE3D1C]'
-                            : 'text-[#0A0A0A]/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#0A0A0A]'
-                        }`}
-                      />
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-display uppercase tracking-tight leading-snug">
-                      {proj.name}
-                    </h3>
-
-                    <p
-                      className={`text-xs font-mono tracking-wider uppercase mt-1 ${
-                        isSelected ? 'text-white/60' : 'text-[#0A0A0A]/60'
+                  <div key={proj.id}>
+                    <button
+                      onClick={() => setActiveProjectIdx(idx)}
+                      onMouseEnter={() => setActiveProjectIdx(idx)}
+                      className={`w-full text-left p-4 sm:p-4.5 transition-all duration-200 flex flex-col justify-between relative group cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#0A0A0A] text-[#F3F0E9]'
+                          : 'hover:bg-white/70 text-[#0A0A0A]'
                       }`}
                     >
-                      {proj.category.split('·')[0].trim()}
-                    </p>
-                  </button>
+                      {/* Active Left Indicator Bar */}
+                      <div
+                        className={`absolute left-0 top-0 bottom-0 w-1.5 bg-[#DE3D1C] transition-opacity ${
+                          isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'
+                        }`}
+                      />
+
+                      <div className="flex justify-between items-center w-full mb-2">
+                        <span className="text-xs font-mono font-bold text-[#DE3D1C]">
+                          [{proj.id}]
+                        </span>
+
+                        <ArrowUpRight
+                          className={`w-4 h-4 transition-transform ${
+                            isSelected
+                              ? 'rotate-45 text-[#DE3D1C]'
+                              : 'text-[#0A0A0A]/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#0A0A0A]'
+                          }`}
+                        />
+                      </div>
+
+                      <h3 className="text-xl sm:text-2xl font-display uppercase tracking-tight leading-snug">
+                        {proj.name}
+                      </h3>
+
+                      <p
+                        className={`text-xs font-mono tracking-wider uppercase mt-1 ${
+                          isSelected ? 'text-white/60' : 'text-[#0A0A0A]/60'
+                        }`}
+                      >
+                        {proj.category.split('·')[0].trim()}
+                      </p>
+                    </button>
+
+                    {/* Mobile-only preview that expands right under the tapped client */}
+                    <AnimatePresence initial={false}>
+                      {isSelected && (
+                        <motion.div
+                          key="preview"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                          className="lg:hidden overflow-hidden border-t-2 border-[#0A0A0A] bg-white"
+                        >
+                          <div className="relative w-full h-[210px] bg-[#0A0A0A] overflow-hidden flex items-center justify-center">
+                            <Image
+                              src={proj.image}
+                              alt={proj.name}
+                              fill
+                              sizes="100vw"
+                              className="object-cover object-top"
+                            />
+                          </div>
+                          <div className="p-4 space-y-3">
+                            <p className="text-[10px] font-mono uppercase tracking-wider text-[#DE3D1C] font-bold leading-relaxed">
+                              {proj.category.replaceAll(' · ', ' ').replaceAll('·', '/')}
+                            </p>
+                            <p className="text-[11px] text-[#0A0A0A]/80 font-light leading-relaxed">
+                              {proj.desc}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {proj.tags.map((tag, tIdx) => (
+                                <span
+                                  key={tIdx}
+                                  className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 bg-[#F3F0E9] text-[#0A0A0A] border border-[#0A0A0A]/20"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <a
+                              href={getResolvedLink(proj)}
+                              target={getResolvedLink(proj).startsWith('http') ? '_blank' : '_self'}
+                              rel="noreferrer"
+                              className="group w-full inline-flex items-center justify-center gap-2 bg-[#0A0A0A] hover:bg-[#DE3D1C] text-white px-4 py-2.5 text-[11px] font-mono font-bold tracking-widest uppercase transition-all duration-200"
+                            >
+                              <span>VIEW PROJECT</span>
+                              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
               })}
             </div>
@@ -216,8 +268,8 @@ export default function Work() {
             </div>
           </div>
 
-          {/* RIGHT SIDE: Preview (Span 7 cols) */}
-          <div className="lg:col-span-7 flex flex-col justify-between bg-[#0A0A0A] text-white">
+          {/* RIGHT SIDE: Preview (Span 7 cols, desktop only — mobile uses inline accordion) */}
+          <div className="hidden lg:col-span-7 lg:flex flex-col justify-between bg-[#0A0A0A] text-white">
             {/* Top Preview Status Bar */}
             <div className="px-5 py-3.5 bg-[#141414] border-b border-white/15 flex justify-between items-center text-xs font-mono">
               <div className="flex items-center gap-2 text-white/90">

@@ -13,13 +13,15 @@ export default function Cursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isFinePointer, setIsFinePointer] = useState(false);
+  const [isFinePointer, setIsFinePointer] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  );
 
   useEffect(() => {
     // Only run on devices with a fine pointer (mouse / precision trackpad)
     const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-    setIsFinePointer(mediaQuery.matches);
-
     if (!mediaQuery.matches) return;
 
     // Add cursor-hiding classes to root document

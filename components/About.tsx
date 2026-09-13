@@ -40,7 +40,7 @@ export default function About() {
 
           <div className="lg:col-span-8">
             <p className="text-2xl sm:text-3xl md:text-4xl font-heading font-medium tracking-tight text-[#0A0A0A] leading-snug">
-              "We don't just build websites — we become your technology partner. Every system we engineer is designed to connect to the next."
+              &ldquo;We don&apos;t just build websites &mdash; we become your technology partner. Every system we engineer is designed to connect to the next.&rdquo;
             </p>
           </div>
         </div>

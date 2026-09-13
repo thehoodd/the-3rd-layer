@@ -151,7 +151,7 @@ export default function Hero() {
                   href="/contact"
                   className="group inline-flex items-center gap-2 border border-[#0A0A0A] hover:border-[#DE3D1C] hover:text-[#DE3D1C] bg-transparent text-[#0A0A0A] px-4 py-3 text-xs font-mono font-bold tracking-widest uppercase transition-all duration-200"
                 >
-                  <span>LET'S TALK</span>
+                  <span>LET&apos;S TALK</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
               </div>

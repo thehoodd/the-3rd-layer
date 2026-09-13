@@ -7,7 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.43-black?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
-[![Location](https://img.shields.io/badge/Studio-Surat%2C%20Gujarat%2C%20India-DE3D1C?style=for-the-badge)](https://thethreelayers.com)
+[![Location](https://img.shields.io/badge/Studio-Surat%2C%20Gujarat%2C%20India-DE3D1C?style=for-the-badge)](https://www.the3rdlayers.com)
 
 <br />
 

@@ -31,11 +31,11 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 border-b border-[#0A0A0A]/15 bg-[#F3F0E9]/90 backdrop-blur-md ${scrolled ? 'py-3' : 'py-4 md:py-5'
           }`}
       >
-        <div className="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 relative flex items-center justify-between">
           {/* Logo / Brand Image */}
           <Link
             href="/"
-            className="group flex items-center transition-opacity hover:opacity-85"
+            className="group flex items-center transition-opacity hover:opacity-85 relative z-10"
             aria-label="THE THREE LAYERS Home"
           >
             <Image
@@ -48,8 +48,16 @@ export default function Navbar() {
             />
           </Link>
 
+          <div className="pointer-events-none absolute inset-0 hidden md:flex items-center justify-center">
+            <div className="w-[calc(100%-5rem)] flex justify-center overflow-hidden">
+              <span className="font-display text-[clamp(1.6rem,2.8vw,4rem)] leading-[0.8] tracking-[0.22em] uppercase text-[#0A0A0A]/15 select-none whitespace-nowrap">
+                THE THREE LAYERS
+              </span>
+            </div>
+          </div>
+
           {/* Unified Hamburger Menu Button (Desktop & Mobile) */}
-          <div className="flex items-center">
+          <div className="flex items-center relative z-10">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`h-9 sm:h-10 px-3.5 sm:px-4 border transition-all duration-200 flex items-center gap-2.5 sm:gap-3 group cursor-pointer ${mobileMenuOpen
@@ -134,7 +142,7 @@ export default function Navbar() {
             <div className="max-w-6xl mx-auto w-full pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-xs font-mono text-[#F3F0E9]/50">
               <div>© 2026 THE THREE LAYERS</div>
               <div className="flex gap-6 mt-4 sm:mt-0">
-                <a href="mailto:hello@thethreelayers.com" className="hover:text-[#DE3D1C] transition-colors">
+                <a href="mailto:hello@the3rdlayers.com" className="hover:text-[#DE3D1C] transition-colors">
                   HELLO@THETHREELAYERS.COM
                 </a>
                 <a href="https://wa.me/9313504709" target="_blank" rel="noreferrer" className="hover:text-[#DE3D1C] transition-colors">

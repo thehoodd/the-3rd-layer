@@ -6,6 +6,8 @@ import TrustedCompanies from '@/components/TrustedCompanies';
 import Work from '@/components/Work';
 import Industries from '@/components/Industries';
 import TechTicker from '@/components/TechTicker';
+import Stats from '@/components/Stats';
+import Testimonials from '@/components/Testimonials';
 import Process from '@/components/Process';
 import HomeCta from '@/components/HomeCta';
 import Footer from '@/components/Footer';
@@ -21,6 +23,8 @@ export default function Home() {
       <Work />
       <Industries />
       <TechTicker />
+      <Stats />
+      <Testimonials />
       <Process />
       <HomeCta />
       <Footer />

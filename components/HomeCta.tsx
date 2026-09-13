@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, MoveRight, Mail, MessageSquare, MapPin, Sparkles } from 'lucide-react';
+import { MoveRight, Mail, MessageSquare, MapPin } from 'lucide-react';
 
 export default function HomeCta() {
   return (
@@ -39,7 +39,7 @@ export default function HomeCta() {
               <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-xs font-mono text-white/60">
                 <div className="flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-[#DE3D1C]" />
-                  <span>hello@thethreelayers.com</span>
+                  <span>hello@the3rdlayers.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MessageSquare className="w-3.5 h-3.5 text-[#DE3D1C]" />

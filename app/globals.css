@@ -157,3 +157,295 @@ body.custom-cursor-active *::after {
 .animate-spin-slow {
   animation: spin-slow 24s linear infinite;
 }
+
+/* ==========================================================================
+   How We Work — Technical SVG Micro-Animations (Process.tsx)
+   ========================================================================== */
+@keyframes hw-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hw-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes hw-ping-ring {
+  0% {
+    transform: scale(0.25);
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Marching data dashes — offsets are multiples of 24 so loops are seamless */
+@keyframes hw-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes hw-flow-slow {
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+@keyframes hw-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes hw-scan {
+  0% {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+}
+
+@keyframes hw-scan-beam {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(90px);
+    opacity: 0;
+  }
+}
+
+@keyframes hw-shimmer {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes hw-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes hw-pump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hw-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes hw-bus-dot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+
+@keyframes hw-cursor-path {
+  0% {
+    transform: translate(250px, 165px);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  30% {
+    transform: translate(120px, 190px);
+  }
+  55% {
+    transform: translate(175px, 145px);
+  }
+  78% {
+    transform: translate(120px, 120px);
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(250px, 165px);
+    opacity: 0;
+  }
+}
+
+.a-hw-spin {
+  transform-box: view-box;
+  transform-origin: 190px 160px;
+  animation: hw-spin 8s linear infinite;
+  will-change: transform;
+}
+
+.a-hw-spin-slow {
+  transform-box: view-box;
+  transform-origin: 190px 160px;
+  animation: hw-spin-rev 40s linear infinite;
+  will-change: transform;
+}
+
+.a-hw-ping {
+  transform-box: view-box;
+  transform-origin: 190px 160px;
+  animation: hw-ping-ring 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.a-hw-ping-delay {
+  transform-box: view-box;
+  transform-origin: 190px 160px;
+  animation: hw-ping-ring 3.2s cubic-bezier(0.4, 0, 0.2, 1) 1.6s infinite;
+  will-change: transform, opacity;
+}
+
+.a-hw-flow {
+  animation: hw-flow 1.6s linear infinite;
+}
+
+.a-hw-flow-slow {
+  animation: hw-flow-slow 3.2s linear infinite;
+}
+
+.a-hw-float {
+  animation: hw-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.a-hw-float-delay {
+  animation: hw-float 5s ease-in-out 2.5s infinite;
+  will-change: transform;
+}
+
+.a-hw-scan {
+  transform-box: view-box;
+  animation: hw-scan 4.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.a-hw-scan-beam {
+  transform-box: view-box;
+  animation: hw-scan-beam 3.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.a-hw-shimmer {
+  animation: hw-shimmer 1.8s ease-in-out infinite;
+}
+
+.a-hw-blink {
+  animation: hw-blink 2.2s ease-in-out infinite;
+}
+
+.a-hw-pump {
+  transform-box: view-box;
+  animation: hw-pump 2.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.a-hw-breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hw-breathe 3.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.a-hw-bus-dot,
+.a-hw-bus-dot-2,
+.a-hw-bus-dot-3 {
+  animation: hw-bus-dot 2.8s linear infinite;
+  will-change: transform, opacity;
+}
+
+.a-hw-bus-dot-2 {
+  animation-delay: 0.95s;
+}
+
+.a-hw-bus-dot-3 {
+  animation-delay: 1.9s;
+}
+
+.a-hw-cursor {
+  transform-box: view-box;
+  animation: hw-cursor-path 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a-hw-spin,
+  .a-hw-spin-slow,
+  .a-hw-ping,
+  .a-hw-ping-delay,
+  .a-hw-flow,
+  .a-hw-flow-slow,
+  .a-hw-float,
+  .a-hw-float-delay,
+  .a-hw-scan,
+  .a-hw-scan-beam,
+  .a-hw-shimmer,
+  .a-hw-blink,
+  .a-hw-pump,
+  .a-hw-breathe,
+  .a-hw-bus-dot,
+  .a-hw-bus-dot-2,
+  .a-hw-bus-dot-3,
+  .a-hw-cursor {
+    animation: none;
+  }
+}
