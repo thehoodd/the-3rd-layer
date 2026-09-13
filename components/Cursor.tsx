@@ -13,30 +13,29 @@ export default function Cursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isFinePointer, setIsFinePointer] = useState(
-    () =>
-      typeof window !== 'undefined' &&
-      window.matchMedia('(hover: hover) and (pointer: fine)').matches
-  );
+  const [isFinePointer, setIsFinePointer] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // Only run on devices with a fine pointer (mouse / precision trackpad)
     const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-    if (!mediaQuery.matches) return;
+    const updateFinePointer = (matches: boolean) => {
+      setIsFinePointer(matches);
 
-    // Add cursor-hiding classes to root document
-    document.documentElement.classList.add('custom-cursor-active');
-    document.body.classList.add('custom-cursor-active');
-
-    const handleMediaChange = (e: MediaQueryListEvent) => {
-      setIsFinePointer(e.matches);
-      if (e.matches) {
+      if (matches) {
         document.documentElement.classList.add('custom-cursor-active');
         document.body.classList.add('custom-cursor-active');
       } else {
         document.documentElement.classList.remove('custom-cursor-active');
         document.body.classList.remove('custom-cursor-active');
       }
+    };
+
+    updateFinePointer(mediaQuery.matches);
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      updateFinePointer(e.matches);
     };
 
     mediaQuery.addEventListener('change', handleMediaChange);
