@@ -5,11 +5,12 @@ export const runtime = 'nodejs';
 let resend: Resend | null = null;
 
 function getResend(): Resend {
-  if (!process.env.RESEND_API_KEY) {
-    throw new Error('Missing Resend API key.');
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) {
+    throw new Error('Missing Resend API key. Add RESEND_API_KEY in Cloudflare secrets or your local env before deploying.');
   }
   if (!resend) {
-    resend = new Resend(process.env.RESEND_API_KEY);
+    resend = new Resend(apiKey);
   }
   return resend;
 }
@@ -46,15 +47,12 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Please provide a valid email address.' }, { status: 400 });
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    return Response.json({ error: 'Resend API key is not configured.' }, { status: 500 });
-  }
-
   const to = process.env.CONTACT_TO_EMAIL?.trim() || 'hello@the3rdlayers.com';
+  const from = process.env.RESEND_FROM_EMAIL?.trim() || 'onboarding@resend.dev';
 
   try {
     const { data, error } = await getResend().emails.send({
-      from: `Website Contact <onboarding@resend.dev>`,
+      from: `Website Contact <${from}>`,
       to: [to],
       replyTo: email,
       subject: `New Project Inquiry // ${name}`,
@@ -72,7 +70,7 @@ export async function POST(request: Request) {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #ffffff88; text-transform: uppercase; font-size: 11px; letter-spacing: 1px;">Service</td>
-                <td style="padding: 8px 0; color: #ffffff;">${service}</td>
+                <td style="padding: 8px 0; color: #ffffff;">${service || 'Not specified'}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #ffffff88; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; vertical-align: top;">Details</td>
@@ -89,7 +87,8 @@ export async function POST(request: Request) {
     }
 
     return Response.json({ success: true, id: data?.id }, { status: 200 });
-  } catch {
-    return Response.json({ error: 'Failed to send your inquiry. Please try again.' }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Failed to send your inquiry. Please try again.';
+    return Response.json({ error: message }, { status: 500 });
   }
 }

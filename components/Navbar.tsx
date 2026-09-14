@@ -56,6 +56,12 @@ export default function Navbar() {
             </div>
           </div>
 
+          <div className="pointer-events-none absolute left-1/2 -top-[8px] -translate-x-1/2 hidden md:flex items-start justify-center">
+            <span className="font-mono text-[5px] sm:text-[6px] tracking-[0.22em] uppercase text-[#DE3D1C]/90 select-none whitespace-nowrap leading-none">
+              ॥ श्री गणेशाय नमः ॥
+            </span>
+          </div>
+
           {/* Unified Hamburger Menu Button (Desktop & Mobile) */}
           <div className="flex items-center relative z-10">
             <button

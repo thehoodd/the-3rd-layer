@@ -29,18 +29,18 @@ export default function TrustedCompanies() {
 
       <div className="w-full border-t border-b border-[#0A0A0A]/15 py-5 bg-white/40">
         <div className="flex overflow-hidden whitespace-nowrap">
-          <div className="animate-marquee flex items-center gap-8 md:gap-12">
+          <div className="animate-marquee flex items-center gap-8 sm:gap-10 md:gap-14">
             {clientLogos.map((client, i) => (
               <div
                 key={`client-1-${i}`}
-                className="relative h-8 w-20 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32 flex items-center justify-center opacity-75 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
+                className="relative flex h-8 w-20 items-center justify-center overflow-visible px-2 opacity-75 transition-opacity duration-300 filter grayscale hover:opacity-100 hover:grayscale-0 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32"
               >
                 <Image
                   src={client.src}
                   alt={client.name}
-                  fill
-                  sizes="(max-width: 768px) 96px, (max-width: 1024px) 120px, 128px"
-                  className="object-contain"
+                  width={160}
+                  height={80}
+                  className="h-full w-auto max-w-full object-contain"
                 />
               </div>
             ))}
@@ -48,14 +48,14 @@ export default function TrustedCompanies() {
             {clientLogos.map((client, i) => (
               <div
                 key={`client-2-${i}`}
-                className="relative h-8 w-20 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32 flex items-center justify-center opacity-75 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
+                className="relative flex h-8 w-20 items-center justify-center overflow-visible px-2 opacity-75 transition-opacity duration-300 filter grayscale hover:opacity-100 hover:grayscale-0 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32"
               >
                 <Image
                   src={client.src}
                   alt={client.name}
-                  fill
-                  sizes="(max-width: 768px) 96px, (max-width: 1024px) 120px, 128px"
-                  className="object-contain"
+                  width={160}
+                  height={80}
+                  className="h-full w-auto max-w-full object-contain"
                 />
               </div>
             ))}
