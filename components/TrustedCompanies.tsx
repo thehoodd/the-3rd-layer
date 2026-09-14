@@ -19,7 +19,7 @@ export default function TrustedCompanies() {
         <div className="flex items-center gap-3">
           <span className="w-2 h-2 bg-[#DE3D1C]" />
           <span className="text-xs font-mono uppercase tracking-widest text-[#0A0A0A] font-bold">
-            TRUSTED BY INNOVATIVE BRANDS & FOUNDERS
+            TRUSTED BY INNOVATIVE BRANDS &amp; FOUNDERS
           </span>
         </div>
         <div className="text-[10px] font-mono text-[#0A0A0A]/40 uppercase tracking-widest">
@@ -27,36 +27,34 @@ export default function TrustedCompanies() {
         </div>
       </div>
 
-      {/* Clean Restrained Marquee Strip */}
-      <div className="w-full border-t border-b border-[#0A0A0A]/15 py-6 bg-white/40">
+      <div className="w-full border-t border-b border-[#0A0A0A]/15 py-5 bg-white/40">
         <div className="flex overflow-hidden whitespace-nowrap">
-          <div className="animate-marquee flex items-center space-x-16 md:space-x-24">
+          <div className="animate-marquee flex items-center gap-8 md:gap-12">
             {clientLogos.map((client, i) => (
               <div
                 key={`client-1-${i}`}
-                className="relative h-12 w-36 md:h-14 md:w-44 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
+                className="relative h-8 w-20 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32 flex items-center justify-center opacity-75 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
               >
                 <Image
                   src={client.src}
                   alt={client.name}
                   fill
-                  sizes="176px"
+                  sizes="(max-width: 768px) 96px, (max-width: 1024px) 120px, 128px"
                   className="object-contain"
                 />
               </div>
             ))}
 
-            {/* Duplicate for seamless infinite marquee loop */}
             {clientLogos.map((client, i) => (
               <div
                 key={`client-2-${i}`}
-                className="relative h-12 w-36 md:h-14 md:w-44 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
+                className="relative h-8 w-20 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32 flex items-center justify-center opacity-75 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
               >
                 <Image
                   src={client.src}
                   alt={client.name}
                   fill
-                  sizes="176px"
+                  sizes="(max-width: 768px) 96px, (max-width: 1024px) 120px, 128px"
                   className="object-contain"
                 />
               </div>

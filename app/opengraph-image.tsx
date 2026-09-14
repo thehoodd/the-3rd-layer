@@ -13,93 +13,114 @@ export default function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background: "#0A0A0A",
-          padding: 72,
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#F3F0E9",
           fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div
+          style={{
+            width: 1080,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <div
             style={{
-              width: 44,
-              height: 44,
+              position: "relative",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "#DE3D1C",
-              color: "#0A0A0A",
-              fontSize: 28,
-              fontWeight: 800,
-              lineHeight: 1,
-              paddingTop: 2,
+              width: "100%",
+              height: 300,
+              marginBottom: 18,
             }}
           >
-            3
-          </div>
-          <div
-            style={{
-              color: "#F3F0E9",
-              fontSize: 30,
-              fontWeight: 700,
-              letterSpacing: 2,
-            }}
-          >
-            {SITE_NAME}
-          </div>
-        </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "center",
+                color: "#0E0E0E",
+                fontSize: 350,
+                fontWeight: 900,
+                lineHeight: 0.72,
+                letterSpacing: -24,
+                transform: "scaleY(0.9)",
+                fontFamily: "Arial Black, Arial, sans-serif",
+              }}
+            >
+              T3L
+            </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            <div
+              style={{
+                position: "absolute",
+                right: 168,
+                top: 42,
+                width: 150,
+                height: 116,
+                background: "#DE3D1C",
+                transform: "skewX(-30deg)",
+                borderRadius: 6,
+                opacity: 1,
+              }}
+            />
+          </div>
+
           <div
             style={{
-              color: "#DE3D1C",
-              fontSize: 34,
+              color: "#0E0E0E",
+              fontSize: 68,
+              fontWeight: 700,
+              letterSpacing: 4,
+              lineHeight: 1.1,
+              textTransform: "uppercase",
+              fontFamily: "Arial, Helvetica, sans-serif",
+              marginTop: 12,
+              marginBottom: 20,
+            }}
+          >
+            {"THE THREE LAYERS"}
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 24,
+              color: "#0E0E0E",
+              fontSize: 30,
               fontWeight: 700,
               letterSpacing: 6,
+              textTransform: "uppercase",
             }}
           >
-            {SITE_TAGLINE}
-          </div>
-          <div
-            style={{
-              color: "#F3F0E9",
-              fontSize: 88,
-              fontWeight: 800,
-              letterSpacing: 1,
-              lineHeight: 1.05,
-              maxWidth: 960,
-            }}
-          >
-            WEB DEVELOPMENT E-COMMERCE &amp; DESIGN
-          </div>
-          <div
-            style={{
-              color: "#F3F0E9",
-              opacity: 0.75,
-              fontSize: 30,
-              fontWeight: 400,
-              lineHeight: 1.4,
-              maxWidth: 980,
-            }}
-          >
-            {DESCRIPTION}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div
-            style={{
-              color: "#F3F0E9",
-              opacity: 0.6,
-              fontSize: 26,
-              letterSpacing: 2,
-            }}
-          >
-            SURAT, GUJARAT · INDIA — SERVING CLIENTS WORLDWIDE
-          </div>
-          <div style={{ color: "#DE3D1C", fontSize: 26, fontWeight: 700, letterSpacing: 1 }}>
-            {SITE_URL.replace("https://", "").replace("www.", "")}
+            <span style={{ opacity: 0.96 }}>Design</span>
+            <span
+              style={{
+                width: 12,
+                height: 12,
+                display: "block",
+                borderRadius: 999,
+                background: "#DE3D1C",
+              }}
+            />
+            <span style={{ opacity: 0.96 }}>Develop</span>
+            <span
+              style={{
+                width: 12,
+                height: 12,
+                display: "block",
+                borderRadius: 999,
+                background: "#DE3D1C",
+              }}
+            />
+            <span style={{ opacity: 0.96 }}>Deploy</span>
           </div>
         </div>
       </div>
