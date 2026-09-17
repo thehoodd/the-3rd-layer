@@ -184,7 +184,7 @@ export default function WorkPage() {
                       alt={project.name}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                      className="object-cover object-top filter grayscale-0 md:grayscale contrast-110 md:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                     />
                     <div className="absolute top-4 left-4 bg-black/85 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white px-2.5 py-1 uppercase">
                       [{project.id}] // {project.category}

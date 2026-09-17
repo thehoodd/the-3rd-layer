@@ -17,6 +17,38 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Complete background scroll lock when mobile menu is open
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const scrollY = window.scrollY;
+
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
+    document.documentElement.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+
+      document.documentElement.style.overflow = '';
+
+      const originalScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, scrollY);
+      document.documentElement.style.scrollBehavior = originalScrollBehavior;
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'WORK', href: '/work' },
     { name: 'ABOUT', href: '/#about' },
@@ -99,7 +131,10 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-[#0A0A0A] text-[#F3F0E9] pt-24 pb-12 px-6 md:px-16 flex flex-col justify-between"
+            className="mobile-menu-drawer fixed inset-0 z-40 bg-[#0A0A0A] text-[#F3F0E9] pt-24 px-6 md:px-16 flex flex-col justify-between"
+            style={{
+              paddingBottom: 'max(2rem, env(safe-area-inset-bottom, 2rem))',
+            }}
           >
             {/* Background watermark */}
             <div className="absolute right-0 bottom-0 text-[18vw] font-display text-white/[0.03] select-none pointer-events-none leading-none pr-4">

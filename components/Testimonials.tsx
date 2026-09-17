@@ -73,7 +73,7 @@ export default function Testimonials() {
           </div>
         </div>
 
-        <div className="relative overflow-hidden">
+        <div className="relative p-3 -m-3 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}

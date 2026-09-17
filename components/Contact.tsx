@@ -22,21 +22,21 @@ const socialChannels = [
   },
   {
     name: 'X / TWITTER',
-    handle: '@the3rdlayers',
+    handle: '@TheThreeLaye',
     action: 'FOLLOW',
-    url: 'https://x.com/the3rdlayers',
+    url: 'https://x.com/TheThreeLaye',
   },
   {
     name: 'GITHUB',
-    handle: 'the3rdlayers',
+    handle: 'the-three-layers',
     action: 'REPOSITORIES',
-    url: 'https://github.com/the3rdlayers',
+    url: 'https://github.com/the-three-layers',
   },
   {
     name: 'INSTAGRAM',
-    handle: '@the3rdlayers',
+    handle: '@the.three.layers',
     action: 'DISPATCHES',
-    url: 'https://www.instagram.com/the3rdlayers',
+    url: 'https://www.instagram.com/the.three.layers',
   },
   {
     name: 'WHATSAPP',
@@ -211,9 +211,8 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className={`w-full bg-white border-2 px-4 py-3.5 flex items-center justify-between text-[#0A0A0A] font-sans text-sm outline-none transition-all duration-200 text-left cursor-pointer ${
-                      dropdownOpen ? 'border-[#DE3D1C] ring-1 ring-[#DE3D1C]' : 'border-[#0A0A0A] hover:border-[#DE3D1C]'
-                    }`}
+                    className={`w-full bg-white border-2 px-4 py-3.5 flex items-center justify-between text-[#0A0A0A] font-sans text-sm outline-none transition-all duration-200 text-left cursor-pointer ${dropdownOpen ? 'border-[#DE3D1C] ring-1 ring-[#DE3D1C]' : 'border-[#0A0A0A] hover:border-[#DE3D1C]'
+                      }`}
                     aria-haspopup="listbox"
                     aria-expanded={dropdownOpen}
                   >
@@ -221,9 +220,8 @@ export default function Contact() {
                       {serviceOptions.find((opt) => opt.value === formData.service)?.label || formData.service}
                     </span>
                     <ChevronDown
-                      className={`w-4 h-4 text-[#0A0A0A] transition-transform duration-200 ${
-                        dropdownOpen ? 'rotate-180 text-[#DE3D1C]' : ''
-                      }`}
+                      className={`w-4 h-4 text-[#0A0A0A] transition-transform duration-200 ${dropdownOpen ? 'rotate-180 text-[#DE3D1C]' : ''
+                        }`}
                     />
                   </button>
 
@@ -247,11 +245,10 @@ export default function Contact() {
                                 setFormData({ ...formData, service: opt.value });
                                 setDropdownOpen(false);
                               }}
-                              className={`w-full px-4 py-3.5 text-xs font-mono tracking-wider uppercase text-left flex items-center justify-between transition-colors cursor-pointer ${
-                                isSelected
+                              className={`w-full px-4 py-3.5 text-xs font-mono tracking-wider uppercase text-left flex items-center justify-between transition-colors cursor-pointer ${isSelected
                                   ? 'bg-[#DE3D1C] text-white font-bold'
                                   : 'hover:bg-white/10 text-white/90'
-                              }`}
+                                }`}
                               role="option"
                               aria-selected={isSelected}
                             >

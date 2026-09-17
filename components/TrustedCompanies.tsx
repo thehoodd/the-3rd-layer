@@ -33,7 +33,7 @@ export default function TrustedCompanies() {
             {clientLogos.map((client, i) => (
               <div
                 key={`client-1-${i}`}
-                className="relative flex h-8 w-20 items-center justify-center overflow-visible px-2 opacity-75 transition-opacity duration-300 filter grayscale hover:opacity-100 hover:grayscale-0 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32"
+                className="relative flex h-8 w-20 items-center justify-center overflow-visible px-2 opacity-100 filter grayscale-0 transition-opacity duration-300 md:opacity-75 md:grayscale md:hover:opacity-100 md:hover:grayscale-0 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32"
               >
                 <Image
                   src={client.src}
@@ -48,7 +48,7 @@ export default function TrustedCompanies() {
             {clientLogos.map((client, i) => (
               <div
                 key={`client-2-${i}`}
-                className="relative flex h-8 w-20 items-center justify-center overflow-visible px-2 opacity-75 transition-opacity duration-300 filter grayscale hover:opacity-100 hover:grayscale-0 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32"
+                className="relative flex h-8 w-20 items-center justify-center overflow-visible px-2 opacity-100 filter grayscale-0 transition-opacity duration-300 md:opacity-75 md:grayscale md:hover:opacity-100 md:hover:grayscale-0 sm:h-9 sm:w-24 md:h-10 md:w-28 lg:h-12 lg:w-32"
               >
                 <Image
                   src={client.src}

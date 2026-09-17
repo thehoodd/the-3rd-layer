@@ -113,7 +113,7 @@ export default function Hero() {
             >
               <div className="flex items-start">
                 <h1 className="text-[15vw] sm:text-[11vw] lg:text-[8.8vw] font-display leading-[0.84] tracking-[0.02em] uppercase text-[#0A0A0A]">
-                  IDEAS
+                  DESIGN
                 </h1>
                 {/* Burnt Orange Asterisk Graphic */}
                 <span className="text-[#DE3D1C] text-[7vw] sm:text-[5vw] lg:text-[3.8vw] font-sans ml-2 md:ml-3 -mt-1 md:-mt-2 animate-spin-slow inline-block select-none">
@@ -122,11 +122,11 @@ export default function Hero() {
               </div>
 
               <h1 className="text-[15vw] sm:text-[11vw] lg:text-[8.8vw] font-display leading-[0.84] tracking-[0.02em] uppercase text-[#0A0A0A]">
-                CODE
+                DEVELOP
               </h1>
 
               <h1 className="text-[15vw] sm:text-[11vw] lg:text-[8.8vw] font-display leading-[0.84] tracking-[0.02em] uppercase text-[#0A0A0A]">
-                IMPACT
+                DEPLOY
               </h1>
             </motion.div>
 
@@ -175,7 +175,7 @@ export default function Hero() {
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="lg:col-span-5 flex flex-col justify-between bg-[#F3F0E9] relative overflow-hidden select-none p-5 sm:p-7 md:p-8"
+          className="lg:col-span-5 flex flex-col justify-between bg-[#F3F0E9] relative overflow-hidden select-none p-3 sm:p-7 md:p-8"
         >
           {/* Subtle Technical Engineering Grid Overlay */}
           <div className="absolute inset-0 pointer-events-none opacity-40">
@@ -401,7 +401,7 @@ export default function Hero() {
                 <circle
                   cx="270"
                   cy="270"
-                  r="52"
+                  r="47"
                   fill="none"
                   stroke="#DE3D1C"
                   strokeWidth="1.5"
@@ -413,7 +413,7 @@ export default function Hero() {
                 <circle
                   cx="270"
                   cy="270"
-                  r="45"
+                  r="40"
                   fill="#DE3D1C"
                   className="drop-shadow-md"
                 />
@@ -421,17 +421,17 @@ export default function Hero() {
                 {/* Core White Monogram Typography */}
                 <text
                   x="270"
-                  y="265"
+                  y="266"
                   textAnchor="middle"
-                  className="font-display font-black fill-white text-[15px] tracking-tight leading-none pointer-events-none select-none"
+                  className="font-display font-black fill-white text-[14px] tracking-tight leading-none pointer-events-none select-none"
                 >
                   THREE
                 </text>
                 <text
                   x="270"
-                  y="280"
+                  y="279"
                   textAnchor="middle"
-                  className="font-mono font-bold fill-white text-[8px] tracking-[0.22em] pointer-events-none select-none"
+                  className="font-mono font-bold fill-white text-[7.5px] tracking-[0.22em] pointer-events-none select-none"
                 >
                   LAYERS
                 </text>
@@ -440,15 +440,17 @@ export default function Hero() {
               {/* --- Interactive HTML Module Nodes Layer (Positioned over SVG) --- */}
               {/* 01 STRATEGY (North) */}
               <div
+                onClick={() => setHoveredModule(hoveredModule === 'strategy' ? null : 'strategy')}
                 onMouseEnter={() => setHoveredModule('strategy')}
                 onMouseLeave={() => setHoveredModule(null)}
-                className="absolute top-2 left-1/2 -translate-x-1/2 cursor-pointer group z-20"
+                className="absolute top-1 sm:top-2 left-1/2 -translate-x-1/2 cursor-pointer group z-20"
               >
                 <div
-                  className={`flex items-center gap-2 px-3 py-1.5 border text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm ${hoveredModule === 'strategy'
-                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-105'
+                  className={`flex items-center gap-1 sm:gap-2 px-1.5 xs:px-2 sm:px-3 py-0.5 sm:py-1.5 border text-[9px] xs:text-[10px] sm:text-xs font-mono uppercase tracking-tight xs:tracking-normal sm:tracking-wider transition-all duration-200 shadow-sm ${
+                    hoveredModule === 'strategy'
+                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-[1.02] sm:scale-105'
                       : 'border-[#0A0A0A] bg-white text-[#0A0A0A] hover:border-[#DE3D1C]'
-                    }`}
+                  }`}
                 >
                   <span className={`font-bold ${hoveredModule === 'strategy' ? 'text-white' : 'text-[#DE3D1C]'}`}>
                     [01]
@@ -459,15 +461,17 @@ export default function Hero() {
 
               {/* 02 DESIGN (West) */}
               <div
+                onClick={() => setHoveredModule(hoveredModule === 'design' ? null : 'design')}
                 onMouseEnter={() => setHoveredModule('design')}
                 onMouseLeave={() => setHoveredModule(null)}
                 className="absolute left-0 top-1/2 -translate-y-1/2 cursor-pointer group z-20"
               >
                 <div
-                  className={`flex items-center gap-2 px-3 py-1.5 border text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm ${hoveredModule === 'design'
-                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-105'
+                  className={`flex items-center gap-1 sm:gap-2 px-1.5 xs:px-2 sm:px-3 py-0.5 sm:py-1.5 border text-[9px] xs:text-[10px] sm:text-xs font-mono uppercase tracking-tight xs:tracking-normal sm:tracking-wider transition-all duration-200 shadow-sm ${
+                    hoveredModule === 'design'
+                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-[1.02] sm:scale-105'
                       : 'border-[#0A0A0A] bg-white text-[#0A0A0A] hover:border-[#DE3D1C]'
-                    }`}
+                  }`}
                 >
                   <span className={`font-bold ${hoveredModule === 'design' ? 'text-white' : 'text-[#DE3D1C]'}`}>
                     [02]
@@ -478,15 +482,17 @@ export default function Hero() {
 
               {/* 03 DEVELOPMENT (East) */}
               <div
+                onClick={() => setHoveredModule(hoveredModule === 'development' ? null : 'development')}
                 onMouseEnter={() => setHoveredModule('development')}
                 onMouseLeave={() => setHoveredModule(null)}
                 className="absolute right-0 top-1/2 -translate-y-1/2 cursor-pointer group z-20"
               >
                 <div
-                  className={`flex items-center gap-2 px-3 py-1.5 border text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm ${hoveredModule === 'development'
-                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-105'
+                  className={`flex items-center gap-1 sm:gap-2 px-1.5 xs:px-2 sm:px-3 py-0.5 sm:py-1.5 border text-[9px] xs:text-[10px] sm:text-xs font-mono uppercase tracking-tight xs:tracking-normal sm:tracking-wider transition-all duration-200 shadow-sm ${
+                    hoveredModule === 'development'
+                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-[1.02] sm:scale-105'
                       : 'border-[#0A0A0A] bg-white text-[#0A0A0A] hover:border-[#DE3D1C]'
-                    }`}
+                  }`}
                 >
                   <span className={`font-bold ${hoveredModule === 'development' ? 'text-white' : 'text-[#DE3D1C]'}`}>
                     [03]
@@ -497,15 +503,17 @@ export default function Hero() {
 
               {/* 04 LAUNCH (South) */}
               <div
+                onClick={() => setHoveredModule(hoveredModule === 'launch' ? null : 'launch')}
                 onMouseEnter={() => setHoveredModule('launch')}
                 onMouseLeave={() => setHoveredModule(null)}
-                className="absolute bottom-2 left-1/2 -translate-x-1/2 cursor-pointer group z-20"
+                className="absolute bottom-1 sm:bottom-2 left-1/2 -translate-x-1/2 cursor-pointer group z-20"
               >
                 <div
-                  className={`flex items-center gap-2 px-3 py-1.5 border text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm ${hoveredModule === 'launch'
-                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-105'
+                  className={`flex items-center gap-1 sm:gap-2 px-1.5 xs:px-2 sm:px-3 py-0.5 sm:py-1.5 border text-[9px] xs:text-[10px] sm:text-xs font-mono uppercase tracking-tight xs:tracking-normal sm:tracking-wider transition-all duration-200 shadow-sm ${
+                    hoveredModule === 'launch'
+                      ? 'border-[#DE3D1C] bg-[#DE3D1C] text-white scale-[1.02] sm:scale-105'
                       : 'border-[#0A0A0A] bg-white text-[#0A0A0A] hover:border-[#DE3D1C]'
-                    }`}
+                  }`}
                 >
                   <span className={`font-bold ${hoveredModule === 'launch' ? 'text-white' : 'text-[#DE3D1C]'}`}>
                     [04]

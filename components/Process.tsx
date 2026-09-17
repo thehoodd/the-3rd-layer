@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
+import { scrollAccordionIntoComfortableArea } from '@/lib/mobileUtils';
 import {
   Target,
   Users,
@@ -824,9 +825,23 @@ const stages: ProcessStage[] = [
    ========================================================================== */
 
 export default function Process() {
-  const [activeIdx, setActiveIdx] = useState(0); // Default to 01 DISCOVER as requested
-  const active = stages[activeIdx];
+  const [desktopActiveIdx, setDesktopActiveIdx] = useState(0); // Desktop default stage 01
+  const [mobileActiveIdx, setMobileActiveIdx] = useState<number | null>(0); // Mobile default stage 01
+  const mobileItemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const active = stages[desktopActiveIdx] || stages[0];
   const ActiveVisual = active.visualComponent;
+
+  const handleMobileStageClick = (idx: number) => {
+    const isClosing = mobileActiveIdx === idx;
+    setMobileActiveIdx(isClosing ? null : idx);
+    if (!isClosing) {
+      scrollAccordionIntoComfortableArea(mobileItemRefs.current[idx], {
+        delayMs: 180,
+        headerPadding: 16,
+      });
+    }
+  };
 
   return (
     <MotionConfig reducedMotion="user">
@@ -858,7 +873,7 @@ export default function Process() {
             className="lg:col-span-4 xl:col-span-3 border-r border-white/10 divide-y divide-white/10 flex flex-col justify-between bg-[#0A0A0A]"
           >
             {stages.map((s, idx) => {
-              const isActive = activeIdx === idx;
+              const isActive = desktopActiveIdx === idx;
 
               return (
                 <button
@@ -868,9 +883,9 @@ export default function Process() {
                   aria-controls={`process-panel-${s.step}`}
                   aria-selected={isActive}
                   tabIndex={0}
-                  onMouseEnter={() => setActiveIdx(idx)}
-                  onClick={() => setActiveIdx(idx)}
-                  onFocus={() => setActiveIdx(idx)}
+                  onMouseEnter={() => setDesktopActiveIdx(idx)}
+                  onClick={() => setDesktopActiveIdx(idx)}
+                  onFocus={() => setDesktopActiveIdx(idx)}
                   className={`w-full text-left px-5 py-4 xl:px-6 xl:py-5.5 transition-all duration-200 flex items-center justify-between relative group cursor-pointer ${
                     isActive
                       ? 'bg-gradient-to-r from-[#DE3D1C]/20 via-[#DE3D1C]/5 to-transparent text-white'
@@ -1072,8 +1087,8 @@ export default function Process() {
                     </span>
                     <button
                       onClick={() => {
-                        if (activeIdx < stages.length - 1) {
-                          setActiveIdx(activeIdx + 1);
+                        if (desktopActiveIdx < stages.length - 1) {
+                          setDesktopActiveIdx(desktopActiveIdx + 1);
                         }
                       }}
                       className="inline-flex items-center gap-2 border border-white/25 hover:border-[#DE3D1C] hover:bg-[#DE3D1C] hover:text-white px-5 py-2.5 text-xs font-mono uppercase font-bold tracking-widest text-white transition-all cursor-pointer shadow-sm"
@@ -1100,13 +1115,18 @@ export default function Process() {
             ========================================================================== */}
         <div className="block lg:hidden border border-white/15 divide-y divide-white/10 bg-[#0A0A0A]">
           {stages.map((s, idx) => {
-            const isActive = activeIdx === idx;
+            const isActive = mobileActiveIdx === idx;
             const Visual = s.visualComponent;
 
             return (
-              <div key={s.step}>
+              <div
+                key={s.step}
+                ref={(el) => {
+                  mobileItemRefs.current[idx] = el;
+                }}
+              >
                 <button
-                  onClick={() => setActiveIdx(idx)}
+                  onClick={() => handleMobileStageClick(idx)}
                   className={`w-full p-4.5 flex items-center justify-between text-left transition-all cursor-pointer relative ${
                     isActive
                       ? 'bg-gradient-to-r from-[#DE3D1C]/20 via-[#DE3D1C]/5 to-transparent text-white'
@@ -1155,7 +1175,7 @@ export default function Process() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden bg-[#0B0B0B] border-t border-white/10"
                     >
                       <div className="p-5 space-y-5">

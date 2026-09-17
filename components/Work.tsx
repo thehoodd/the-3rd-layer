@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { getAlburaqLink } from '@/lib/clientLinks';
+import { useIsMobile, scrollAccordionIntoComfortableArea } from '@/lib/mobileUtils';
 
 const projects = [
   {
@@ -92,9 +93,28 @@ const projects = [
 ];
 
 export default function Work() {
-  const [activeProjectIdx, setActiveProjectIdx] = useState(0);
+  const isMobile = useIsMobile(1024);
+  const [desktopActiveIdx, setDesktopActiveIdx] = useState(0);
+  const [mobileActiveIdx, setMobileActiveIdx] = useState<number | null>(0);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const topProjects = projects.slice(0, 4);
-  const active = topProjects[activeProjectIdx] || topProjects[0];
+  const active = topProjects[desktopActiveIdx] || topProjects[0];
+
+  const handleProjectClick = (idx: number) => {
+    if (isMobile) {
+      const isClosing = mobileActiveIdx === idx;
+      setMobileActiveIdx(isClosing ? null : idx);
+      if (!isClosing) {
+        scrollAccordionIntoComfortableArea(itemRefs.current[idx], {
+          delayMs: 180,
+          headerPadding: 16,
+        });
+      }
+    } else {
+      setDesktopActiveIdx(idx);
+    }
+  };
 
   const getResolvedLink = (proj: typeof active) => {
     if (proj.id === '02') {
@@ -146,13 +166,22 @@ export default function Work() {
             {/* Top 4 Companies List (No cut-offs, no scrollbar) */}
             <div className="divide-y divide-[#0A0A0A]/15 flex-1">
               {topProjects.map((proj, idx) => {
-                const isSelected = activeProjectIdx === idx;
+                const isSelected = isMobile
+                  ? mobileActiveIdx === idx
+                  : desktopActiveIdx === idx;
 
                 return (
-                  <div key={proj.id}>
+                  <div
+                    key={proj.id}
+                    ref={(el) => {
+                      itemRefs.current[idx] = el;
+                    }}
+                  >
                     <button
-                      onClick={() => setActiveProjectIdx(idx)}
-                      onMouseEnter={() => setActiveProjectIdx(idx)}
+                      onClick={() => handleProjectClick(idx)}
+                      onMouseEnter={() => {
+                        if (!isMobile) setDesktopActiveIdx(idx);
+                      }}
                       className={`w-full text-left p-4 sm:p-4.5 transition-all duration-200 flex flex-col justify-between relative group cursor-pointer ${
                         isSelected
                           ? 'bg-[#0A0A0A] text-[#F3F0E9]'
@@ -195,13 +224,13 @@ export default function Work() {
 
                     {/* Mobile-only preview that expands right under the tapped client */}
                     <AnimatePresence initial={false}>
-                      {isSelected && (
+                      {isMobile && isSelected && (
                         <motion.div
                           key="preview"
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                           className="lg:hidden overflow-hidden border-t-2 border-[#0A0A0A] bg-white"
                         >
                           <div className="relative w-full h-[210px] bg-[#0A0A0A] overflow-hidden flex items-center justify-center">
